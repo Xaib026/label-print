@@ -1,12 +1,3 @@
-// export function setupCounter(element) {
-//   let counter = 0
-//   const setCounter = (count) => {
-//     counter = count
-//     element.innerHTML = `count is ${counter}`
-//   }
-//   element.addEventListener('click', () => setCounter(counter + 1))
-//   setCounter(0)
-// }
 
 export function headerToggle(element) {
   
@@ -15,23 +6,6 @@ export function headerToggle(element) {
     element.querySelector('i').classList.toggle('fa-rotate-180');
   })
 }
-
-// export function generateCanvas(button){ 
-//   button.addEventListener('click',()=>{
-//    const paperWidth = document.querySelector('#paper-width').value
-//    const paperHeight = document.querySelector('#paper-height').value
-//    const noOfCells = document.querySelector('#no-of-cells').value
-//    const noOfRows = document.querySelector('#no-of-rows').value 
-//    const noOfCols = document.querySelector('#no-of-cols').value
-//    console.log(paperWidth, paperHeight, noOfRows, noOfCols)
-//    document.querySelector('#canvasBody').style.width = `${paperWidth}in`
-//    document.querySelector('#canvasBody').style.height = `${paperHeight}in`
-//    document.querySelector('#canvasBody .flex').innerHTML = ''
-//    for (let i = 0; i < noOfCells; i++) {
-//      document.querySelector('#canvasBody .flex').innerHTML += `<span class="inline-block border p-1" style="width:${noOfCols}in;height:${noOfRows}in"></span>`
-//    }
-//   })
-// }
 
 export function generateCanvas(button) {
   button.addEventListener('click', () => {

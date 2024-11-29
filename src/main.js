@@ -1,28 +1,5 @@
 import '../src/css/main.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { generateCanvas, headerToggle, printCanvas } from './counter.js'
-
-// document.querySelector('#app').innerHTML = `
-//   <div>
-//     <a href="https://vite.dev" target="_blank">
-//       <img src="${viteLogo}" class="logo" alt="Vite logo" />
-//     </a>
-//     <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-//       <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-//     </a>
-//     <h1 class="text-3xl text-center text-blue-700">
-//       Hello world Tailwind!
-//     </h1>
-//     <h2 class="text-lg text-red-500">New test</h2>
-//     <div class="card">
-//       <button id="counter" type="button"></button>
-//     </div>
-//     <p class="read-the-docs">
-//       Click on the Vite logo to learn more
-//     </p>
-//   </div>
-// `
+import { generateCanvas, headerToggle, printCanvas } from './operations.js.js'
 
 document.querySelector('#app').innerHTML = `
   <header class="relative">
@@ -63,17 +40,11 @@ document.querySelector('#app').innerHTML = `
   </section>
 `
 
-// setupCounter(document.querySelector('#counter'))
-// document.querySelector('#no-of-cells').addEventListener('change', (e) => {
-//   alert(e.target.value)
-// })
-
 document.addEventListener('DOMContentLoaded', () => {
   const saveButton = document.querySelector('#save_btn');
   if (saveButton) {
     generateCanvas(saveButton);
   }
-
   headerToggle(document.querySelector('#header-toggle'))
 });
 
