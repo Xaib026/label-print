@@ -1,4 +1,4 @@
-
+export const css = new URL('../src/css/main.css', import.meta.url).href;
 export function headerToggle(element) {
   
   element.addEventListener('click', () => {
@@ -69,7 +69,7 @@ export function printCanvas(element) {
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Print</title>
-            <link href="./src/css/main.css" rel="stylesheet">
+            <link href="${css}" rel="stylesheet">
         </head>
         <body class="p-6 bg-white">
             ${printContent.outerHTML}
