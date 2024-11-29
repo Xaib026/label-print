@@ -1,5 +1,5 @@
 import '../src/css/main.css'
-import { generateCanvas, headerToggle, printCanvas } from './operations.js.js'
+import { generateCanvas, headerToggle, printCanvas } from './operations.js'
 
 document.querySelector('#app').innerHTML = `
   <header class="relative">
