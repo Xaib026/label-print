@@ -1,5 +1,8 @@
 import '../src/css/main.css'
-import { generateCanvas, headerToggle, printCanvas } from './operations.js'
+import { 
+  generateCanvas, clearCanvas, headerToggle, printCanvas,
+   handleFile 
+  } from './operations.js'
 
 document.querySelector('#app').innerHTML = `
   <header class="relative">
@@ -9,12 +12,12 @@ document.querySelector('#app').innerHTML = `
         <input type="text" id="no-of-cells" class="block border w-28 h-10 px-2" >
       </div>
       <div>
-        <label class="text-xs text-gray-500">Cells Height (in)</label>
-        <input type="text" id="no-of-rows" class="block border w-28 h-10 px-2" >
+        <label class="text-xs text-gray-500">Cells Width (mm)</label>
+        <input type="text" id="no-of-cols" class="block border w-28 h-10 px-2" >
       </div>
       <div>
-        <label class="text-xs text-gray-500">Cells Width (in)</label>
-        <input type="text" id="no-of-cols" class="block border w-28 h-10 px-2" >
+        <label class="text-xs text-gray-500">Cells Height (mm)</label>
+        <input type="text" id="no-of-rows" class="block border w-28 h-10 px-2" >
       </div>
       <div>
         <label class="text-xs text-gray-500">Paper Width (in)</label>
@@ -25,7 +28,8 @@ document.querySelector('#app').innerHTML = `
         <input type="text" id="paper-height" class="block border w-28 h-10 px-2" >
       </div>
       <div>
-        <button id="save_btn" class="bg-black text-white px-4 py-2 rounded-md hover:bg-slate-800">Create</button>
+        <button id="save_btn" class="bg-black text-white px-4 py-2 rounded-md hover:bg-slate-800 disabled:bg-gray-300">Create</button>
+        <button id="clear_btn" class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-500 hidden">Clear</button>
       </div>
     </nav>
     <button class="absolute top-full -mt-2 left-6 bg-white text-black px-4 py-1 rounded-md" id="header-toggle"><i class="fa-solid fa-chevron-up"></i></button>
@@ -36,17 +40,35 @@ document.querySelector('#app').innerHTML = `
         <div class="flex flex-wrap"></div>
       </div>
     </div>
-    <button id="print_btn" class="fixed bottom-6 right-6 bg-black text-white text-xl px-5 py-4 rounded-full hover:bg-slate-800 disabled:hidden"><i class="fa-solid fa-print"></i></button>
+    <input type="file" class="hidden" id="upload_excel_file">
+    <button id="upload_btn" class="fixed bottom-24 -mb-1 right-6 bg-green-500 text-white text-xl px-5 py-4 rounded-full hover:bg-green-600 transition-all disabled:hidden disabled:bottom-16"><i class="fa-solid fa-file-import"></i></button>
+    <button id="print_btn" class="fixed bottom-6 right-6 bg-black text-white text-xl px-5 py-4 rounded-full hover:bg-slate-800 transition-all disabled:hidden disabled:bottom-0"><i class="fa-solid fa-print"></i></button>
   </section>
 `
 
+// document.querySelector('#app').innerHTML = `
+// <input type="file" class="hidden" id="upload_excel_file">
+// <button id="upload_btn" class="fixed bottom-24 -mb-1 right-6 bg-green-500 text-white text-xl px-5 py-4 rounded-full hover:bg-green-600 transition-all disabled:hidden disabled:bottom-16"><i class="fa-solid fa-file-import"></i></button>`
+
 document.addEventListener('DOMContentLoaded', () => {
   const saveButton = document.querySelector('#save_btn');
+  const clearButtton = document.querySelector('#clear_btn');
   if (saveButton) {
     generateCanvas(saveButton);
+  }
+  if (clearButtton) {
+    clearButtton.addEventListener('click', () => {
+      clearCanvas();
+    })
   }
   headerToggle(document.querySelector('#header-toggle'))
 });
 
 
 printCanvas(document.querySelector("#print_btn"))
+const fileInput = document.querySelector("#upload_excel_file")
+document.querySelector("#upload_btn").addEventListener('click', () => {
+  fileInput.click();
+})
+
+fileInput.addEventListener('change', handleFile)
