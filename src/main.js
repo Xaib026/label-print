@@ -34,15 +34,18 @@ document.querySelector('#app').innerHTML = `
     </nav>
     <button class="absolute top-full -mt-2 left-6 bg-white text-black px-4 py-1 rounded-md" id="header-toggle"><i class="fa-solid fa-chevron-up"></i></button>
   </header>
-  <section class="w-full h-full bg-gray-50 overflow-auto p-5">
+  <section class="w-full h-full bg-gray-50 overflow-auto p-5" id="mainBody">
     <div class="w-fit mx-auto">
       <div class="canvas border hidden p-4" id="canvasBody">
         <div class="flex flex-wrap"></div>
       </div>
     </div>
-    <input type="file" class="hidden" id="upload_excel_file">
-    <button id="upload_btn" class="fixed bottom-24 -mb-1 right-6 bg-green-500 text-white text-xl px-5 py-4 rounded-full hover:bg-green-600 transition-all disabled:hidden disabled:bottom-16"><i class="fa-solid fa-file-import"></i></button>
-    <button id="print_btn" class="fixed bottom-6 right-6 bg-black text-white text-xl px-5 py-4 rounded-full hover:bg-slate-800 transition-all disabled:hidden disabled:bottom-0"><i class="fa-solid fa-print"></i></button>
+    <span id="preloader" class="hidden absolute inset-0 m-auto w-10 h-10 rounded-full border-4 border-black border-l-transparent animate-spin opacity-50 "></span>
+    <div class="flex flex-col gap-2 fixed bottom-6 right-6">
+      <input type="file" class="hidden" id="upload_excel_file" accept=".xls, .xlsx, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+      <button id="upload_btn" class="bg-green-500 text-white text-xl px-5 py-4 rounded-full hover:bg-green-600 transition-all disabled:hidden disabled:bottom-16"><i class="fa-solid fa-file-import"></i></button>
+      <button id="print_btn" class="bg-black text-white text-xl px-5 py-4 rounded-full hover:bg-slate-800 transition-all disabled:hidden disabled:bottom-0"><i class="fa-solid fa-print"></i></button>
+    </div>
   </section>
 `
 

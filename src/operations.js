@@ -130,35 +130,44 @@ export function printCanvas(element) {
 
 
 export function handleFile(e) {
-  var file = e.target.files[0];
-  var reader = new FileReader();
+  const fileInput = e.target;
+  const file = fileInput.files[0];
+
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.readAsArrayBuffer(file);
+
+  // Preloader for load the file if in case it takes too long
+  document.querySelector("#preloader").classList.remove('hidden');
 
   reader.onload = function(event) {
     try {
-    var data = event.target.result;
-    var workbook = XLSX.read(data, { type: 'array' });
-    var ws = workbook.Sheets[workbook.SheetNames[0]];
-    console.log(ws);
-    var jsonData = XLSX.utils.sheet_to_json(ws, { header: 1 });
-    var noOfCells1 = document.querySelector('#no-of-cells').value;
-    var cells = document.querySelectorAll("#canvasBody>.flex>span");
-    for (let i = 0; i < noOfCells1; i++) {
-      if (jsonData[i]===undefined ) {
-        return;
+      const data = event.target.result;
+      const workbook = XLSX.read(data, { type: 'array' });
+      const ws = workbook.Sheets[workbook.SheetNames[0]];
+      const jsonData = XLSX.utils.sheet_to_json(ws, { header: 1 });
+      const noOfCells1 = parseInt(document.querySelector('#no-of-cells').value, 10);
+      const cells = document.querySelectorAll("#canvasBody > .flex > span");
+
+      for (let i = 0; i < noOfCells1; i++) {
+        if (!jsonData[i]) break;
+        if (cells[i]) {
+          cells[i].innerText = jsonData[i].join(', ');
+        }
       }
-      cells[i].innerText = jsonData[i]
-    }
-    /* DO SOMETHING WITH workbook HERE */
+
+      document.querySelector("#preloader").classList.add('hidden');
     } catch (error) {
       console.error("Error parsing file:", error);
       alert("There was an error processing the file. Please ensure it is a valid Excel file.");
     }
+    fileInput.value = "";
   };
 
-  reader.onerror = function (err) {
+  reader.onerror = function(err) {
     console.error("Error reading file:", err);
     alert("Failed to read file. Please try again.");
+    fileInput.value = "";
   };
-
-  reader.readAsArrayBuffer(file);
 }
